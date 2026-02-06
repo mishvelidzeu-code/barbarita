@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>საქართველოს ბავშვები და მომავალი</title>
+<meta name="description" content="ბავშვებისთვის შექმნილი სოციალური პასუხისმგებლობის ინტერაქტიული აპლიკაცია.">
+<meta name="theme-color" content="#2563eb">
+
+<!-- PWA -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon1.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon1.png">
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Segoe UI,sans-serif;background:#f8fafc;color:#1e293b}
+
+/* NAV */
+nav{position:sticky;top:0;background:#fff;border-bottom:1px solid #e5e7eb;z-index:1000}
+.nav-inner{
+  max-width:1200px;margin:auto;padding:14px 16px;
+  position:relative;display:flex;justify-content:flex-end;align-items:center
+}
+.logo{
+  position:absolute;left:50%;transform:translateX(-50%);
+  height:36px;cursor:pointer
+}
+.burger{font-size:26px;cursor:pointer}
+.menu{
+  position:absolute;top:64px;left:0;right:0;
+  background:#fff;list-style:none;padding:20px 0;margin:0;
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+  opacity:0;transform:translateY(-10px);pointer-events:none;
+  transition:.3s ease
+}
+.menu.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.menu a{text-decoration:none;font-weight:600;color:#334155}
+
+/* SECTIONS */
+section{max-width:1200px;margin:auto;padding:70px 20px}
+h2{text-align:center}
+
+/* HERO */
+.home-hero img{
+  width:100%;max-height:60vh;object-fit:contain;
+  background:#0f172a;border-radius:20px
+}
+.home-hero h1{text-align:center;margin-top:30px}
+
+/* INFO */
+.home-info{
+  margin-top:50px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px
+}
+.info-card{
+  background:#fff;border-radius:16px;padding:24px;text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.06)
+}
+
+/* VOTE */
+.vote-box button{
+  width:100%;
+  margin:10px 0;
+  padding:14px;
+  font-size:16px;
+  border-radius:12px;
+  border:1px solid #cbd5e1;
+  background:#fff;
+  color:#1e293b;
+  cursor:pointer;
+}
+.vote-box button:hover{background:#eef2ff}
+.vote-result{margin-top:10px;font-weight:600}
+
+/* GRID / CARD */
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:24px
+}
+.card{
+  background:#fff;border-radius:18px;padding:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);text-align:center
+}
+.card img{
+  width:100%;height:200px;object-fit:cover;
+  border-radius:14px;margin-bottom:12px
+}
+
+/* GALLERY – horizontal scroll */
+.gallery-scroll{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding-bottom:10px;
+}
+.gallery-scroll img{
+  flex:0 0 80%;
+  max-width:80%;
+  height:200px;
+  object-fit:cover;
+  border-radius:16px;
+  scroll-snap-align:start;
+}
+@media(min-width:900px){
+  .gallery-scroll img{
+    flex:0 0 30%;
+    max-width:30%;
+  }
+}
+
+/* STATS */
+.stat-number{font-size:32px;font-weight:800;color:#2563eb}
+
+/* FORM – NO ZOOM */
+form{display:grid;gap:12px}
+input,textarea,button{
+  padding:12px;border-radius:10px;border:1px solid #cbd5e1
+}
+button{
+  background:#2563eb;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+}
+button:active,
+button:focus{
+  transform:none;
+}
+
+/* CONFETTI */
+.confetti{
+  position:fixed;
+  width:8px;
+  height:8px;
+  top:-10px;
+  z-index:9999;
+  animation:fall 4.5s linear forwards;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+
+/* VIDEO */
+video{width:100%;border-radius:16px;margin-top:40px}
+
+/* FOOTER */
+footer{text-align:center;padding:40px;color:#64748b;font-size:14px}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <img src="images/logo.png" class="logo" onclick="scrollToTop()">
+    <div class="burger" id="burger">☰</div>
+    <ul class="menu" id="menu">
+      <li><a onclick="scrollToId('home')">მთავარი</a></li>
+      <li><a onclick="scrollToId('projects')">პროექტები</a></li>
+      <li><a onclick="scrollToId('gallery')">გალერია</a></li>
+      <li><a onclick="scrollToId('wish')">სურვილის გაგზავნა</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+  <div class="home-hero">
+    <img src="images/home.png">
+    <h1>ბავშვები, რომლებიც ქმნიან უკეთეს მომავალს</h1>
+  </div>
+
+  <div class="home-info">
+    <div class="info-card">🎯 ლიდერობა</div>
+    <div class="info-card">🤝 გუნდური მუშაობა</div>
+    <div class="info-card">🌱 სოციალური პასუხისმგებლობა</div>
+  </div>
+
+  <h2>რომელი მიმართულება მოგწონს ყველაზე მეტად?</h2>
+  <div class="card vote-box">
+    <button onclick="vote()">🌱 ბუნების დაცვა</button>
+    <button onclick="vote()">🤝 დახმარება სხვებს</button>
+    <button onclick="vote()">🏫 სკოლის გაუმჯობესება</button>
+    <div class="vote-result" id="voteResult">შენი ხმა მნიშვნელოვანია 💙</div>
+  </div>
+
+  <h2>ჩვენი შედეგები</h2>
+  <div class="grid" id="statsSection">
+    <div class="card"><div class="stat-number" id="s1">0</div>ბავშვი</div>
+    <div class="card"><div class="stat-number" id="s2">0</div>კარგი საქმე</div>
+    <div class="card"><div class="stat-number" id="s3">0</div>პროექტი</div>
+  </div>
+
+  <h2>მშობლების ზონა</h2>
+  <div class="card">
+    🔒 უსაფრთხო გარემო • 🛡️ ჩატის გარეშე • ⏱️ 20–30 წთ
+  </div>
+
+  <video autoplay muted loop playsinline controls>
+    <source src="videos/intro.mp4">
+  </video>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <h2>პროექტები</h2>
+  <div class="grid">
+    <div class="card"><img src="images/project1.png">სიკეთის კვირა</div>
+    <div class="card"><img src="images/project2.png">მწვანე მომავალი</div>
+  </div>
+</section>
+
+<!-- GALLERY PAGE -->
+<section id="gallery">
+  <h2>გალერია</h2>
+  <div class="gallery-scroll">
+    <img src="images/gallery1.png">
+    <img src="images/gallery2.png">
+    <img src="images/gallery3.png">
+    <img src="images/gallery4.png">
+    <img src="images/gallery5.png">
+    <img src="images/gallery6.png">
+    <img src="images/gallery7.png">
+    <img src="images/gallery8.png">
+    <img src="images/gallery9.png">
+    <img src="images/gallery10.png">
+  </div>
+</section>
+
+<!-- WISH -->
+<section id="wish">
+  <h2>შენი სურვილი 💌</h2>
+  <div class="card">
+    <form name="wish" method="POST" data-netlify="true" id="wishForm">
+      <input type="hidden" name="form-name" value="wish">
+      <input name="name" placeholder="სახელი 🙂" required>
+      <textarea name="message" rows="4" placeholder="შენი იდეა ✨" required></textarea>
+      <button type="submit">გაგზავნა 🚀</button>
+    </form>
+  </div>
+</section>
+
+<footer>© 2026 საქართველოს ბავშვები და მომავალი</footer>
+
+<script>
+const menu=document.getElementById("menu");
+const burger=document.getElementById("burger");
+burger.onclick=()=>menu.classList.toggle("show");
+document.addEventListener("click",e=>{
+  if(!menu.contains(e.target)&&!burger.contains(e.target))menu.classList.remove("show");
+});
+
+function scrollToId(id){
+  menu.classList.remove("show");
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+function scrollToTop(){window.scrollTo({top:0,behavior:"smooth"})}
+
+function vote(){
+  voteResult.innerText="მადლობა! შენი ხმა ჩაითვალა 💙";
+}
+
+/* STATS */
+function animateCounter(id,end){
+  let i=0,el=document.getElementById(id);
+  const t=setInterval(()=>{
+    el.innerText=++i;
+    if(i>=end)clearInterval(t);
+  },25);
+}
+const obs=new IntersectionObserver(e=>{
+  if(e[0].isIntersecting){
+    animateCounter("s1",120);
+    animateCounter("s2",340);
+    animateCounter("s3",18);
+    obs.disconnect();
+  }
+},{threshold:.4});
+obs.observe(document.getElementById("statsSection"));
+
+/* CONFETTI – more & slower */
+function launchConfetti(){
+  const colors=["#2563eb","#22c55e","#f59e0b","#ef4444","#a855f7"];
+  for(let i=0;i<40;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=colors[Math.floor(Math.random()*colors.length)];
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),5000);
+  }
+}
+document.getElementById("wishForm").addEventListener("submit",e=>{
+  launchConfetti();
+});
+</script>
+
+</body>
+</html>

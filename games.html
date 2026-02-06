@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>თამაშები ბავშვებისთვის</title>
+<meta name="description" content="საგანმანათლებლო მათემატიკური თამაშები ბავშვებისთვის">
+<link rel="icon" href="icon1.png">
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,sans-serif;
+  background:linear-gradient(180deg,#f8fafc,#eef2ff);
+  color:#1e293b;
+}
+section{max-width:900px;margin:auto;padding:70px 20px}
+h1,h2{text-align:center}
+.card{
+  background:#fff;
+  border-radius:20px;
+  padding:28px;
+  box-shadow:0 20px 50px rgba(0,0,0,.08);
+  margin-top:30px;
+}
+button{
+  padding:14px 18px;
+  border-radius:14px;
+  border:none;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  background:#2563eb;
+  color:#fff;
+}
+button.secondary{
+  background:#e5e7eb;
+  color:#1e293b;
+}
+button:active{transform:scale(.97)}
+.game-box{
+  text-align:center;
+  margin-top:20px;
+}
+.example{
+  font-size:28px;
+  font-weight:800;
+  margin:20px 0;
+}
+.answers{
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.score{
+  margin-top:20px;
+  font-weight:700;
+  color:#2563eb;
+}
+a{color:#2563eb;text-decoration:none;font-weight:600}
+.divider{
+  height:1px;
+  background:#e5e7eb;
+  margin:50px 0;
+}
+</style>
+</head>
+
+<body>
+
+<section>
+  <a href="index.html">← დაბრუნება მთავარ გვერდზე</a>
+  <h1>🎮 საგანმანათლებლო თამაშები</h1>
+
+  <!-- GAME 1 -->
+  <div class="card">
+    <h2>🧮 მათემატიკური მაგალითები</h2>
+    <p style="text-align:center">
+      ამოხსენი 10 მაგალითი და შეაგროვე ქულები ⭐
+    </p>
+
+    <div class="game-box">
+      <div class="example" id="mathExample">დაიწყე თამაში</div>
+      <input id="mathAnswer" type="number" placeholder="შენი პასუხი"
+        style="padding:12px;border-radius:12px;border:1px solid #cbd5e1;font-size:16px">
+      <br><br>
+      <button onclick="checkMath()">შემოწმება</button>
+      <div class="score" id="mathScore"></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- GAME 2 -->
+  <div class="card">
+    <h2>⚖️ რომელი მეტია?</h2>
+    <p style="text-align:center">
+      შეადარე ორი მაგალითი და აირჩიე სწორი პასუხი
+    </p>
+
+    <div class="game-box">
+      <div class="example" id="compareExample">დაიწყე თამაში</div>
+
+      <div class="answers">
+        <button class="secondary" onclick="checkCompare('left')">⬅ მარცხენა</button>
+        <button class="secondary" onclick="checkCompare('equal')">= ტოლია</button>
+        <button class="secondary" onclick="checkCompare('right')">➡ მარჯვენა</button>
+      </div>
+
+      <div class="score" id="compareScore"></div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+/* GAME 1 */
+let mathCount=0, mathPoints=0;
+let currentResult=0;
+
+function newMath(){
+  const ops=["+","-","*","/"];
+  const a=Math.floor(Math.random()*20)+1;
+  const b=Math.floor(Math.random()*10)+1;
+  const op=ops[Math.floor(Math.random()*ops.length)];
+  currentResult=Math.floor(eval(a+op+b));
+  document.getElementById("mathExample").innerText=`${a} ${op} ${b}`;
+}
+newMath();
+
+function checkMath(){
+  const val=Number(document.getElementById("mathAnswer").value);
+  if(val===currentResult) mathPoints++;
+  mathCount++;
+  document.getElementById("mathAnswer").value="";
+  if(mathCount<10){
+    newMath();
+    document.getElementById("mathScore").innerText=
+      `ქულა: ${mathPoints} / ${mathCount}`;
+  }else{
+    document.getElementById("mathExample").innerText="🎉 თამაში დასრულდა!";
+    document.getElementById("mathScore").innerText=
+      `შედეგი: ${mathPoints} / 10`;
+  }
+}
+
+/* GAME 2 */
+let leftVal=0,rightVal=0,comparePoints=0,compareCount=0;
+
+function newCompare(){
+  const ops=["+","-","*","/"];
+  const a=Math.floor(Math.random()*20)+1;
+  const b=Math.floor(Math.random()*10)+1;
+  const c=Math.floor(Math.random()*20)+1;
+  const d=Math.floor(Math.random()*10)+1;
+  const op1=ops[Math.floor(Math.random()*ops.length)];
+  const op2=ops[Math.floor(Math.random()*ops.length)];
+  leftVal=Math.floor(eval(a+op1+b));
+  rightVal=Math.floor(eval(c+op2+d));
+  document.getElementById("compareExample").innerText=
+    `${a} ${op1} ${b}   ?   ${c} ${op2} ${d}`;
+}
+newCompare();
+
+function checkCompare(choice){
+  let correct =
+    (leftVal>rightVal && choice==="left") ||
+    (rightVal>leftVal && choice==="right") ||
+    (leftVal===rightVal && choice==="equal");
+
+  if(correct) comparePoints++;
+  compareCount++;
+
+  if(compareCount<10){
+    newCompare();
+    document.getElementById("compareScore").innerText=
+      `ქულა: ${comparePoints} / ${compareCount}`;
+  }else{
+    document.getElementById("compareExample").innerText="🏆 თამაში დასრულდა!";
+    document.getElementById("compareScore").innerText=
+      `შედეგი: ${comparePoints} / 10`;
+  }
+}
+</script>
+
+</body>
+</html>

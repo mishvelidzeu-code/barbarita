@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ka" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ბიო ტუალეტი თბილისი - EcoToilet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+        }
+        
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        }
+        
+        .blue-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        }
+        
+        .light-blue-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+        }
+        
+        .contact-form {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+        }
+        
+        .floating-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .pulse-blue {
+            animation: pulse-blue 2s infinite;
+        }
+        
+        @keyframes pulse-blue {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+        }
+    </style>
+</head>
+<body class="h-full bg-blue-50">
+    <header class="hero-bg text-white py-20">
+        <div class="container mx-auto px-6">
+            <nav class="flex justify-between items-center mb-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                        <span class="text-2xl text-blue-600">🚽</span>
+                    </div>
+                    <h1 class="text-2xl font-bold">EcoToilet</h1>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <button onclick="scrollToSection('services')" class="hover:text-blue-200 transition-colors">მომსახურება</button>
+                    <button onclick="scrollToSection('prices')" class="hover:text-blue-200 transition-colors">ფასები</button>
+                    <button onclick="scrollToSection('contact')" class="hover:text-blue-200 transition-colors">კონტაქტი</button>
+                </div>
+            </nav>
+            
+            <div class="text-center max-w-4xl mx-auto">
+                <h2 class="text-5xl font-bold mb-6 floating-animation">ბიო ტუალეტი თბილისში</h2>
+                <p class="text-xl mb-8 opacity-90">
+                    პროფესიონალური ბიო ტუალეტების გაქირავება ღონისძიებებისთვის, 
+                    მშენებლობისთვის და ყველა სახის ღონისძიებისთვის თბილისში
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="scrollToSection('contact')" class="pulse-blue bg-white text-blue-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition-colors">
+                        📞 დაგვირეკეთ ახლავე
+                    </button>
+                    <button onclick="scrollToSection('services')" class="border-2 border-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-colors">
+                        მომსახურების ნახვა
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="services" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-blue-900">ჩვენი მომსახურება</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="service-card bg-blue-50 rounded-xl p-8 border-2 border-blue-100">
+                    <div class="text-5xl mb-6 text-center">🏗️</div>
+                    <h3 class="text-2xl font-bold mb-4 text-blue-900 text-center">მშენებლობისთვის</h3>
+                    <ul class="text-blue-700 space-y-2">
+                        <li>✓ გრძელვადიანი გაქირავება</li>
+                        <li>✓ რეგულარული მომსახურება</li>
+                        <li>✓ სპეციალური ფასები</li>
+                        <li>✓ 24/7 მხარდაჭერა</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card bg-blue-50 rounded-xl p-8 border-2 border-blue-100">
+                    <div class="text-5xl mb-6 text-center">🎉</div>
+                    <h3 class="text-2xl font-bold mb-4 text-blue-900 text-center">ღონისძიებებისთვის</h3>
+                    <ul class="text-blue-700 space-y-2">
+                        <li>✓ ქორწილები და ზეიმები</li>
+                        <li>✓ კონცერტები და ფესტივალები</li>
+                        <li>✓ სპორტული ღონისძიებები</li>
+                        <li>✓ კორპორატიული ღონისძიებები</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card bg-blue-50 rounded-xl p-8 border-2 border-blue-100">
+                    <div class="text-5xl mb-6 text-center">🚛</div>
+                    <h3 class="text-2xl font-bold mb-4 text-blue-900 text-center">მიტანა-მოტანა</h3>
+                    <ul class="text-blue-700 space-y-2">
+                        <li>✓ უფასო მიტანა თბილისში</li>
+                        <li>✓ სწრაფი დაყენება</li>
+                        <li>✓ პროფესიონალური გუნდი</li>
+                        <li>✓ დროული მომსახურება</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="blue-gradient py-16 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-8">რატომ ჩვენ?</h2>
+            <div class="grid md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="text-center">
+                    <div class="text-4xl mb-4">⭐</div>
+                    <h3 class="text-xl font-bold mb-2">ხარისხი</h3>
+                    <p class="text-blue-100">ყველაზე მაღალი ხარისხის ბიო ტუალეტები</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-4">🚀</div>
+                    <h3 class="text-xl font-bold mb-2">სისწრაფე</h3>
+                    <p class="text-blue-100">24 საათში მიტანა-დაყენება</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-4">💰</div>
+                    <h3 class="text-xl font-bold mb-2">ფასი</h3>
+                    <p class="text-blue-100">ყველაზე მისაღები ფასები ბაზარზე</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-4">🛡️</div>
+                    <h3 class="text-xl font-bold mb-2">გარანტია</h3>
+                    <p class="text-blue-100">სრული გარანტია და მხარდაჭერა</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="prices" class="py-16 bg-blue-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-blue-900">ფასები</h2>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg p-8 border-2 border-blue-100">
+                    <h3 class="text-2xl font-bold mb-4 text-blue-900 text-center">დღიური</h3>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-blue-600">25₾</span>
+                        <span class="text-blue-500">/დღე</span>
+                    </div>
+                    <ul class="text-blue-700 space-y-2 mb-8">
+                        <li>✓ 1 ბიო ტუალეტი</li>
+                        <li>✓ უფასო მიტანა</li>
+                        <li>✓ დაყენება</li>
+                        <li>✓ ძირითადი მომსახურება</li>
+                    </ul>
+                    <button onclick="orderService('დღიური')" class="w-full light-blue-gradient text-white py-3 rounded-lg font-bold hover:opacity-90 transition-opacity">
+                        შეკვეთა
+                    </button>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-8 border-4 border-blue-500 relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-bold">
+                        პოპულარული
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-blue-900 text-center">კვირეული</h3>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-blue-600">150₾</span>
+                        <span class="text-blue-500">/კვირა</span>
+                    </div>
+                    <ul class="text-blue-700 space-y-2 mb-8">
+                        <li>✓ 1 ბიო ტუალეტი</li>
+                        <li>✓ უფასო მიტანა</li>
+                        <li>✓ დაყენება</li>
+                        <li>✓ 2-ჯერ გაწმენდა</li>
+                        <li>✓ 24/7 მხარდაჭერა</li>
+                    </ul>
+                    <button onclick="orderService('კვირეული')" class="w-full blue-gradient text-white py-3 rounded-lg font-bold hover:opacity-90 transition-opacity">
+                        შეკვეთა
+                    </button>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-8 border-2 border-blue-100">
+                    <h3 class="text-2xl font-bold mb-4 text-blue-900 text-center">თვიური</h3>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-blue-600">500₾</span>
+                        <span class="text-blue-500">/თვე</span>
+                    </div>
+                    <ul class="text-blue-700 space-y-2 mb-8">
+                        <li>✓ 1 ბიო ტუალეტი</li>
+                        <li>✓ უფასო მიტანა</li>
+                        <li>✓ დაყენება</li>
+                        <li>✓ კვირეული გაწმენდა</li>
+                        <li>✓ პრიორიტეტული მხარდაჭერა</li>
+                    </ul>
+                    <button onclick="orderService('თვიური')" class="w-full light-blue-gradient text-white py-3 rounded-lg font-bold hover:opacity-90 transition-opacity">
+                        შეკვეთა
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-blue-700 mb-4">მრავალი ბიო ტუალეტის შეკვეთისას ფასდაკლება!</p>
+                <button onclick="requestQuote()" class="bg-blue-600 text-white px-8 py-3 rounded-full font-bold hover:bg-blue-700 transition-colors">
+                    ინდივიდუალური შეთავაზების მიღება
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-form py-16 text-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-12">დაგვიკავშირდით</h2>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6">კონტაქტის ინფორმაცია</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center">
+                                    <span class="text-xl">📞</span>
+                                </div>
+                                <div>
+                                    <p class="font-bold">ტელეფონი</p>
+                                    <p class="text-blue-100">+995 555 123 456</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center">
+                                    <span class="text-xl">📧</span>
+                                </div>
+                                <div>
+                                    <p class="font-bold">ელ-ფოსტა</p>
+                                    <p class="text-blue-100">info@ecotoilet.ge</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center">
+                                    <span class="text-xl">📍</span>
+                                </div>
+                                <div>
+                                    <p class="font-bold">მისამართი</p>
+                                    <p class="text-blue-100">თბილისი, საქართველო</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center">
+                                    <span class="text-xl">🕒</span>
+                                </div>
+                                <div>
+                                    <p class="font-bold">სამუშაო საათები</p>
+                                    <p class="text-blue-100">24/7 ხელმისაწვდომი</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6">შეკვეთის ფორმა</h3>
+                        <form onsubmit="submitOrder(event)" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-bold mb-2">სახელი *</label>
+                                <input type="text" id="name" required class="w-full px-4 py-3 rounded-lg text-blue-900 border-2 border-blue-300 focus:border-blue-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-bold mb-2">ტელეფონი *</label>
+                                <input type="tel" id="phone" required class="w-full px-4 py-3 rounded-lg text-blue-900 border-2 border-blue-300 focus:border-blue-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label for="service" class="block text-sm font-bold mb-2">მომსახურება *</label>
+                                <select id="service" required class="w-full px-4 py-3 rounded-lg text-blue-900 border-2 border-blue-300 focus:border-blue-500 focus:outline-none">
+                                    <option value="">აირჩიეთ მომსახურება</option>
+                                    <option value="დღიური">დღიური გაქირავება</option>
+                                    <option value="კვირეული">კვირეული გაქირავება</option>
+                                    <option value="თვიური">თვიური გაქირავება</option>
+                                    <option value="ღონისძიება">ღონისძიებისთვის</option>
+                                    <option value="მშენებლობა">მშენებლობისთვის</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="date" class="block text-sm font-bold mb-2">სასურველი თარიღი</label>
+                                <input type="date" id="date" class="w-full px-4 py-3 rounded-lg text-blue-900 border-2 border-blue-300 focus:border-blue-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-bold mb-2">დამატებითი ინფორმაცია</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg text-blue-900 border-2 border-blue-300 focus:border-blue-500 focus:outline-none" placeholder="მიუთითეთ რაოდენობა, მისამართი და სხვა დეტალები..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-blue-400 hover:bg-blue-300 text-blue-900 py-4 rounded-lg font-bold text-lg transition-colors">
+                                შეკვეთის გაგზავნა 🚀
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-blue-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                            <span class="text-xl">🚽</span>
+                        </div>
+                        <h3 class="text-xl font-bold">EcoToilet</h3>
+                    </div>
+                    <p class="text-blue-200">
+                        თბილისის #1 ბიო ტუალეტების მომსახურება. 
+                        ხარისხი, სისწრაფე და საიმედოობა.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">მომსახურება</h4>
+                    <ul class="text-blue-200 space-y-2">
+                        <li>მშენებლობისთვის</li>
+                        <li>ღონისძიებებისთვის</li>
+                        <li>მიტანა-მოტანა</li>
+                        <li>24/7 მხარდაჭერა</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">კონტაქტი</h4>
+                    <ul class="text-blue-200 space-y-2">
+                        <li>📞 +995 555 123 456</li>
+                        <li>📧 info@ecotoilet.ge</li>
+                        <li>📍 თბილისი, საქართველო</li>
+                        <li>🕒 24/7 ხელმისაწვდომი</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-blue-700 mt-8 pt-8 text-center">
+                <p class="text-blue-200">© 2024 EcoToilet. ყველა უფლება დაცულია.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function orderService(serviceType) {
+            document.getElementById('service').value = serviceType;
+            scrollToSection('contact');
+            
+            // Show notification
+            showNotification(`${serviceType} პაკეტი არჩეულია! შეავსეთ ფორმა შეკვეთისთვის.`, 'info');
+        }
+
+        function requestQuote() {
+            const message = 'ინდივიდუალური შეთავაზებისთვის დაგვიკავშირდით ტელეფონზე ან შეავსეთ ფორმა!';
+            showNotification(message, 'info');
+            scrollToSection('contact');
+        }
+
+        function submitOrder(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const message = document.getElementById('message').value;
+            
+            if (name && phone && service) {
+                showNotification('შეკვეთა წარმატებით გაიგზავნა! ჩვენ დაგიკავშირდებით 30 წუთში.', 'success');
+                
+                // Reset form
+                event.target.reset();
+                
+                // Simulate order processing
+                setTimeout(() => {
+                    showNotification('ჩვენი მენეჯერი მალე დაგიკავშირდებათ!', 'info');
+                }, 3000);
+            }
+        }
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+            
+            notification.className = `fixed top-4 right-4 ${bgColor} text-white px-6 py-4 rounded-lg shadow-lg z-50 max-w-sm`;
+            notification.innerHTML = `
+                <div class="flex items-center space-x-3">
+                    <span class="text-xl">${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span>
+                    <p class="font-medium">${message}</p>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            notification.style.transform = 'translateX(100%)';
+            notification.style.transition = 'transform 0.3s ease';
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
+
+        // Add scroll animations
+        function observeElements() {
+            const cards = document.querySelectorAll('.service-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        }
+
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            observeElements();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9942148fd58b9317',t:'MTc2MTM5OTE1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
