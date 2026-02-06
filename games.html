@@ -158,10 +158,19 @@ a{color:#2563eb;text-decoration:none;font-weight:600}
     <div class="example" id="engQuestion">დაიწყე თამაში</div>
 
     <div class="answers">
-      <button class="secondary" onclick="checkEng('a')">a</button>
-      <button class="secondary" onclick="checkEng('the')">the</button>
-      <button class="secondary" onclick="checkEng('an')">an</button>
-    </div>
+  <!-- ARTICLES -->
+  <button id="btn-a" class="secondary" onclick="checkEng('a')">a</button>
+  <button id="btn-an" class="secondary" onclick="checkEng('an')">an</button>
+  <button id="btn-the" class="secondary" onclick="checkEng('the')">the</button>
+
+  <!-- DEMONSTRATIVES -->
+  <button id="btn-this" class="secondary" onclick="checkEng('this')">this</button>
+  <button id="btn-that" class="secondary" onclick="checkEng('that')">that</button>
+  <button id="btn-these" class="secondary" onclick="checkEng('these')">these</button>
+  <button id="btn-those" class="secondary" onclick="checkEng('those')">those</button>
+</div>
+
+
 
     <div class="score" id="engScore"></div>
   </div>
@@ -255,26 +264,54 @@ function checkCompare(choice){
 }
 /* GAME 3 – ENGLISH */
 const engQuestions = [
-  { q: "This is ___ monkey", a: "a" },
-  { q: "I see ___ apple", a: "an" },
-  { q: "___ sun is yellow", a: "the" },
-  { q: "She has ___ cat", a: "a" },
-  { q: "This is ___ elephant", a: "an" },
-  { q: "___ book is on the table", a: "the" },
-  { q: "He has ___ dog", a: "a" },
-  { q: "I eat ___ orange", a: "an" },
-  { q: "___ sky is blue", a: "the" },
-  { q: "This is ___ ball", a: "a" }
-];
+  /* ARTICLES */
+  { q: "This is ___ monkey", a: "a", type: "article" },
+  { q: "I see ___ apple", a: "an", type: "article" },
+  { q: "___ sun is yellow", a: "the", type: "article" },
+  { q: "She has ___ cat", a: "a", type: "article" },
+  { q: "This is ___ elephant", a: "an", type: "article" },
+  { q: "___ book is on the table", a: "the", type: "article" },
 
+  /* THIS / THAT / THESE / THOSE */
+  { q: "___ is my pencil (near)", a: "this", type: "demo" },
+  { q: "___ is my house (far)", a: "that", type: "demo" },
+  { q: "___ are my shoes (near)", a: "these", type: "demo" },
+  { q: "___ are the mountains (far)", a: "those", type: "demo" },
+  { q: "___ is my bag (near)", a: "this", type: "demo" },
+  { q: "___ are cars over there", a: "those", type: "demo" }
+];
 let engIndex = 0;
 let engPoints = 0;
 
 function showEng(){
-  document.getElementById("engQuestion").innerText =
-    engQuestions[engIndex].q;
+  const q = engQuestions[engIndex];
+
+  document.getElementById("engQuestion").innerText = q.q;
+
+  // ყველა ღილაკი
+  const articleBtns = ["btn-a","btn-an","btn-the"];
+  const demoBtns = ["btn-this","btn-that","btn-these","btn-those"];
+
+  if(q.type === "article"){
+    articleBtns.forEach(id =>
+      document.getElementById(id).style.display = "inline-block"
+    );
+    demoBtns.forEach(id =>
+      document.getElementById(id).style.display = "none"
+    );
+  }else{
+    articleBtns.forEach(id =>
+      document.getElementById(id).style.display = "none"
+    );
+    demoBtns.forEach(id =>
+      document.getElementById(id).style.display = "inline-block"
+    );
+  }
+
   document.getElementById("engScore").innerText =
-    `ქულა: ${engPoints} / ${engIndex}`;
+    engIndex === 0
+      ? "დაიწყე თამაში 🎯"
+      : `ქულა: ${engPoints} / ${engIndex}`;
 }
 
 showEng();
