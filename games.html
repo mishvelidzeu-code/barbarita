@@ -106,6 +106,15 @@ a{color:#2563eb;text-decoration:none;font-weight:600}
 <section>
   <a href="index.html">← დაბრუნება მთავარ გვერდზე</a>
   <h1>🎮 საგანმანათლებლო თამაშები</h1>
+<div class="card" style="text-align:center">
+  <h2>🏆 საერთო ქულა</h2>
+  <div id="totalScore" style="font-size:32px;font-weight:800">
+    0
+  </div>
+</div>
+
+<div class="divider"></div>
+
 
   <!-- GAME 1 -->
   <div class="card">
@@ -190,6 +199,9 @@ a{color:#2563eb;text-decoration:none;font-weight:600}
   <div class="score" id="memoryScore">ნაპოვნი წყვილი: 0 / 4</div>
 </div>
 
+<div class="divider"></div>
+
+
 <!-- GAME 5 – FIND THE ODD ONE -->
 <div class="card">
   <h2>🧩 რომელი არის განსხვავებული?</h2>
@@ -210,6 +222,13 @@ a{color:#2563eb;text-decoration:none;font-weight:600}
 </section>
 
 <script>
+let totalScore = 0;
+
+function addToTotal(points){
+  totalScore += points;
+  document.getElementById("totalScore").innerText = totalScore;
+}
+
 /* GAME 1 */
 let mathCount=0, mathPoints=0;
 let currentResult=0;
@@ -238,6 +257,8 @@ function checkMath(){
     document.getElementById("mathExample").innerText="🎉 თამაში დასრულდა!";
     document.getElementById("mathScore").innerText=
       `შედეგი: ${mathPoints} / 10`;
+addToTotal(mathPoints);
+
   }
 }
 
@@ -277,6 +298,8 @@ function checkCompare(choice){
     document.getElementById("compareExample").innerText="🏆 თამაში დასრულდა!";
     document.getElementById("compareScore").innerText=
       `შედეგი: ${comparePoints} / 10`;
+addToTotal(comparePoints);
+
   }
 }
 /* GAME 3 – ENGLISH */
@@ -346,16 +369,18 @@ function checkEng(answer){
   engIndex++;
 
   setTimeout(()=>{
-    box.style.color = "";
-    if(engIndex < engQuestions.length){
-      showEng();
-    }else{
-      box.innerText = "🎉 თამაში დასრულდა!";
-      document.getElementById("engScore").innerText =
-        `შედეგი: ${engPoints} / ${engQuestions.length}`;
-    }
-  }, 500);
-}
+  box.style.color = "";
+  if(engIndex < engQuestions.length){
+    showEng();
+  }else{
+    box.innerText = "🎉 თამაში დასრულდა!";
+    document.getElementById("engScore").innerText =
+      `შედეგი: ${engPoints} / ${engQuestions.length}`;
+
+    addToTotal(engPoints);
+  }
+}, 500);
+
 /* GAME 4 – MEMORY */
 const icons = ["🐊","🐊","🐒","🐒","📱","📱","👛","👛","❓"];
 let firstCard = null;
@@ -387,6 +412,8 @@ icons.forEach(icon=>{
         card.classList.add("matched");
         foundPairs++;
         score.innerText = `ნაპოვნი წყვილი: ${foundPairs} / 4`;
+addToTotal(1);
+
         firstCard = null;
       }else{
         lockBoard = true;
@@ -446,6 +473,8 @@ function checkOdd(choice, btn){
     oddPoints++;
     btn.style.background = "#16a34a";
     btn.style.color = "#fff";
+addToTotal(1);
+
   }else{
     btn.style.background = "#dc2626";
     btn.style.color = "#fff";
