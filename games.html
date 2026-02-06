@@ -177,6 +177,7 @@ a{color:#2563eb;text-decoration:none;font-weight:600}
 </div>
 <div class="divider"></div>
 
+
 <!-- GAME 4 – MEMORY -->
 <div class="card">
   <h2>🧠 იპოვე წყვილები</h2>
@@ -189,6 +190,22 @@ a{color:#2563eb;text-decoration:none;font-weight:600}
   <div class="score" id="memoryScore">ნაპოვნი წყვილი: 0 / 4</div>
 </div>
 
+<!-- GAME 5 – FIND THE ODD ONE -->
+<div class="card">
+  <h2>🧩 რომელი არის განსხვავებული?</h2>
+  <p style="text-align:center">
+    დააჭირე იმას, რომელიც სხვებისგან განსხვავდება
+  </p>
+
+  <div class="answers" id="oddOptions" style="font-size:36px"></div>
+
+  <div class="score" id="oddScore"></div>
+
+  <button id="oddRestart" class="secondary"
+    style="display:none" onclick="restartOdd()">
+    🔄 თავიდან თამაში
+  </button>
+</div>
 
 </section>
 
@@ -385,6 +402,78 @@ icons.forEach(icon=>{
 
   grid.appendChild(card);
 });
+
+/* GAME 5 – FIND THE ODD ONE */
+
+const oddQuestions = [
+  { items: ["🐶","🐶","🐶","🍎"], answer: "🍎" },
+  { items: ["🚗","🚗","🚲","🚗"], answer: "🚲" },
+  { items: ["🍌","🍌","🍓","🍌"], answer: "🍓" },
+  { items: ["🐱","🐱","🐶","🐱"], answer: "🐶" },
+  { items: ["🔵","🔵","🔵","🔴"], answer: "🔴" }
+];
+
+let oddIndex = 0;
+let oddPoints = 0;
+
+const oddBox = document.getElementById("oddOptions");
+const oddScore = document.getElementById("oddScore");
+
+function showOdd(){
+  oddBox.innerHTML = "";
+  const q = oddQuestions[oddIndex];
+
+  q.items
+    .sort(() => Math.random() - 0.5)
+    .forEach(item=>{
+      const btn = document.createElement("button");
+      btn.className = "secondary";
+      btn.style.fontSize = "36px";
+      btn.innerText = item;
+
+      btn.onclick = () => checkOdd(item, btn);
+      oddBox.appendChild(btn);
+    });
+
+  oddScore.innerText =
+    oddIndex === 0
+      ? "დაიწყე თამაში 🎯"
+      : `ქულა: ${oddPoints} / ${oddIndex}`;
+}
+
+function checkOdd(choice, btn){
+  if(choice === oddQuestions[oddIndex].answer){
+    oddPoints++;
+    btn.style.background = "#16a34a";
+    btn.style.color = "#fff";
+  }else{
+    btn.style.background = "#dc2626";
+    btn.style.color = "#fff";
+  }
+
+  oddIndex++;
+
+  setTimeout(()=>{
+    if(oddIndex < oddQuestions.length){
+      showOdd();
+    }else{
+      oddBox.innerHTML = "🏆 თამაში დასრულდა!";
+      oddScore.innerText =
+        `შედეგი: ${oddPoints} / ${oddQuestions.length}`;
+      document.getElementById("oddRestart").style.display = "inline-block";
+    }
+  }, 600);
+}
+
+function restartOdd(){
+  oddIndex = 0;
+  oddPoints = 0;
+  document.getElementById("oddRestart").style.display = "none";
+  showOdd();
+}
+
+// start game
+showOdd();
 
 
 </script>
