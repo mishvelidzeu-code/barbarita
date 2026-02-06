@@ -65,6 +65,39 @@ a{color:#2563eb;text-decoration:none;font-weight:600}
   background:#e5e7eb;
   margin:50px 0;
 }
+.memory-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:20px;
+}
+
+.memory-card{
+  background:#2563eb;
+  border-radius:16px;
+  height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:36px;
+  cursor:pointer;
+  color:transparent;
+  user-select:none;
+  transition:transform .3s, background .3s;
+}
+
+.memory-card.open{
+  background:#fff;
+  color:#1e293b;
+  transform:rotateY(180deg);
+}
+
+.memory-card.matched{
+  background:#16a34a;
+  color:#fff;
+  cursor:default;
+}
+
 </style>
 </head>
 
@@ -112,6 +145,41 @@ a{color:#2563eb;text-decoration:none;font-weight:600}
       <div class="score" id="compareScore"></div>
     </div>
   </div>
+<div class="divider"></div>
+
+<!-- GAME 3 -->
+<div class="card">
+  <h2>🇬🇧 ინგლისური თამაში</h2>
+  <p style="text-align:center">
+    აირჩიე სწორი სიტყვა წინადადებისთვის
+  </p>
+
+  <div class="game-box">
+    <div class="example" id="engQuestion">დაიწყე თამაში</div>
+
+    <div class="answers">
+      <button class="secondary" onclick="checkEng('a')">a</button>
+      <button class="secondary" onclick="checkEng('the')">the</button>
+      <button class="secondary" onclick="checkEng('an')">an</button>
+    </div>
+
+    <div class="score" id="engScore"></div>
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- GAME 4 – MEMORY -->
+<div class="card">
+  <h2>🧠 იპოვე წყვილები</h2>
+  <p style="text-align:center">
+    დააჭირე კარტებს და იპოვე ერთნაირი იკონები
+  </p>
+
+  <div class="memory-grid" id="memoryGrid"></div>
+
+  <div class="score" id="memoryScore">ნაპოვნი წყვილი: 0 / 4</div>
+</div>
+
 
 </section>
 
@@ -121,7 +189,8 @@ let mathCount=0, mathPoints=0;
 let currentResult=0;
 
 function newMath(){
-  const ops=["+","-","*","/"];
+  const ops=["+","-","*"];
+
   const a=Math.floor(Math.random()*20)+1;
   const b=Math.floor(Math.random()*10)+1;
   const op=ops[Math.floor(Math.random()*ops.length)];
@@ -150,7 +219,8 @@ function checkMath(){
 let leftVal=0,rightVal=0,comparePoints=0,compareCount=0;
 
 function newCompare(){
-  const ops=["+","-","*","/"];
+  const ops=["+","-","*"];
+
   const a=Math.floor(Math.random()*20)+1;
   const b=Math.floor(Math.random()*10)+1;
   const c=Math.floor(Math.random()*20)+1;
@@ -183,6 +253,103 @@ function checkCompare(choice){
       `შედეგი: ${comparePoints} / 10`;
   }
 }
+/* GAME 3 – ENGLISH */
+const engQuestions = [
+  { q: "This is ___ monkey", a: "a" },
+  { q: "I see ___ apple", a: "an" },
+  { q: "___ sun is yellow", a: "the" },
+  { q: "She has ___ cat", a: "a" },
+  { q: "This is ___ elephant", a: "an" },
+  { q: "___ book is on the table", a: "the" },
+  { q: "He has ___ dog", a: "a" },
+  { q: "I eat ___ orange", a: "an" },
+  { q: "___ sky is blue", a: "the" },
+  { q: "This is ___ ball", a: "a" }
+];
+
+let engIndex = 0;
+let engPoints = 0;
+
+function showEng(){
+  document.getElementById("engQuestion").innerText =
+    engQuestions[engIndex].q;
+  document.getElementById("engScore").innerText =
+    `ქულა: ${engPoints} / ${engIndex}`;
+}
+
+showEng();
+
+function checkEng(answer){
+  const box = document.getElementById("engQuestion");
+
+  if(answer === engQuestions[engIndex].a){
+    engPoints++;
+    box.style.color = "#16a34a";
+  }else{
+    box.style.color = "#dc2626";
+  }
+
+  engIndex++;
+
+  setTimeout(()=>{
+    box.style.color = "";
+    if(engIndex < engQuestions.length){
+      showEng();
+    }else{
+      box.innerText = "🎉 თამაში დასრულდა!";
+      document.getElementById("engScore").innerText =
+        `შედეგი: ${engPoints} / ${engQuestions.length}`;
+    }
+  }, 500);
+}
+/* GAME 4 – MEMORY */
+const icons = ["🐊","🐊","🐒","🐒","📱","📱","👛","👛","❓"];
+let firstCard = null;
+let lockBoard = false;
+let foundPairs = 0;
+
+// shuffle
+icons.sort(() => Math.random() - 0.5);
+
+const grid = document.getElementById("memoryGrid");
+const score = document.getElementById("memoryScore");
+
+icons.forEach(icon=>{
+  const card = document.createElement("div");
+  card.className = "memory-card";
+  card.innerText = icon;
+
+  card.onclick = () => {
+    if(lockBoard || card.classList.contains("open") || card.classList.contains("matched")) return;
+
+    card.classList.add("open");
+
+    if(!firstCard){
+      firstCard = card;
+    }else{
+      if(firstCard.innerText === card.innerText && firstCard !== card){
+
+        firstCard.classList.add("matched");
+        card.classList.add("matched");
+        foundPairs++;
+        score.innerText = `ნაპოვნი წყვილი: ${foundPairs} / 4`;
+        firstCard = null;
+      }else{
+        lockBoard = true;
+        setTimeout(()=>{
+          firstCard.classList.remove("open");
+          card.classList.remove("open");
+          firstCard = null;
+          lockBoard = false;
+        }, 700);
+      }
+    }
+  };
+
+  grid.appendChild(card);
+});
+
+
 </script>
 
 </body>
