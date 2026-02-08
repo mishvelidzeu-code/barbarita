@@ -263,14 +263,14 @@ function checkMath(){
   if(val===currentResult) mathPoints++;
   mathCount++;
   document.getElementById("mathAnswer").value="";
-  if(mathCount<10){
+  if(mathCount<20){
     newMath();
     document.getElementById("mathScore").innerText=
       `ქულა: ${mathPoints} / ${mathCount}`;
   }else{
     document.getElementById("mathExample").innerText="🎉 თამაში დასრულდა!";
     document.getElementById("mathScore").innerText=
-      `შედეგი: ${mathPoints} / 10`;
+      `შედეგი: ${mathPoints} / 20`;
 addToTotal(mathPoints);
 
   }
@@ -304,14 +304,14 @@ function checkCompare(choice){
   if(correct) comparePoints++;
   compareCount++;
 
-  if(compareCount<10){
+  if(compareCount<20){
     newCompare();
     document.getElementById("compareScore").innerText=
       `ქულა: ${comparePoints} / ${compareCount}`;
   }else{
     document.getElementById("compareExample").innerText="🏆 თამაში დასრულდა!";
     document.getElementById("compareScore").innerText=
-      `შედეგი: ${comparePoints} / 10`;
+      `შედეგი: ${comparePoints} / 20`;
 addToTotal(comparePoints);
 
   }
@@ -332,7 +332,16 @@ const engQuestions = [
   { q: "___ are my shoes (near)", a: "these", type: "demo" },
   { q: "___ are the mountains (far)", a: "those", type: "demo" },
   { q: "___ is my bag (near)", a: "this", type: "demo" },
-  { q: "___ are cars over there", a: "those", type: "demo" }
+  { q: "___ are cars over there", a: "those", type: "demo" },
+{ q: "I have ___ orange", a: "an", type: "article" },
+{ q: "___ car is very fast", a: "the", type: "article" },
+{ q: "___ is my phone (near)", a: "this", type: "demo" },
+{ q: "___ are my friends (near)", a: "these", type: "demo" },
+{ q: "___ house is far away", a: "that", type: "demo" },
+{ q: "___ apples are red", a: "those", type: "demo" },
+{ q: "She has ___ umbrella", a: "an", type: "article" },
+{ q: "___ moon is bright", a: "the", type: "article" }
+
 ];
 let engIndex = 0;
 let engPoints = 0;
@@ -493,6 +502,155 @@ const oddQuestions = [
     answer: "milk"
   }
 ];
+const oddQuestions = [
+  {
+    words: [
+      { text: "ვაშლი", meaning: "apple" },
+      { text: "apple", meaning: "apple" },
+      { text: "яблоко", meaning: "apple" },
+      { text: "ქლიავი", meaning: "plum" }
+    ],
+    answer: "plum"
+  },
+  {
+    words: [
+      { text: "სახლი", meaning: "house" },
+      { text: "house", meaning: "house" },
+      { text: "maison", meaning: "house" },
+      { text: "дерево", meaning: "tree" }
+    ],
+    answer: "tree"
+  },
+  {
+    words: [
+      { text: "ძაღლი", meaning: "dog" },
+      { text: "dog", meaning: "dog" },
+      { text: "chien", meaning: "dog" },
+      { text: "кошка", meaning: "cat" }
+    ],
+    answer: "cat"
+  },
+  {
+    words: [
+      { text: "წყალი", meaning: "water" },
+      { text: "water", meaning: "water" },
+      { text: "eau", meaning: "water" },
+      { text: "молоко", meaning: "milk" }
+    ],
+    answer: "milk"
+  },
+  {
+    words: [
+      { text: "მზე", meaning: "sun" },
+      { text: "sun", meaning: "sun" },
+      { text: "soleil", meaning: "sun" },
+      { text: "moon", meaning: "moon" }
+    ],
+    answer: "moon"
+  },
+  {
+    words: [
+      { text: "ხე", meaning: "tree" },
+      { text: "tree", meaning: "tree" },
+      { text: "arbre", meaning: "tree" },
+      { text: "dog", meaning: "dog" }
+    ],
+    answer: "dog"
+  },
+  {
+    words: [
+      { text: "კატა", meaning: "cat" },
+      { text: "cat", meaning: "cat" },
+      { text: "chat", meaning: "cat" },
+      { text: "horse", meaning: "horse" }
+    ],
+    answer: "horse"
+  },
+  {
+    words: [
+      { text: "რძე", meaning: "milk" },
+      { text: "milk", meaning: "milk" },
+      { text: "lait", meaning: "milk" },
+      { text: "water", meaning: "water" }
+    ],
+    answer: "water"
+  },
+  {
+    words: [
+      { text: "წიგნი", meaning: "book" },
+      { text: "book", meaning: "book" },
+      { text: "livre", meaning: "book" },
+      { text: "pen", meaning: "pen" }
+    ],
+    answer: "pen"
+  },
+  {
+    words: [
+      { text: "ბურთი", meaning: "ball" },
+      { text: "ball", meaning: "ball" },
+      { text: "balle", meaning: "ball" },
+      { text: "car", meaning: "car" }
+    ],
+    answer: "car"
+  },
+  {
+    words: [
+      { text: "თევზი", meaning: "fish" },
+      { text: "fish", meaning: "fish" },
+      { text: "poisson", meaning: "fish" },
+      { text: "bird", meaning: "bird" }
+    ],
+    answer: "bird"
+  },
+  {
+    words: [
+      { text: "ფანქარი", meaning: "pencil" },
+      { text: "pencil", meaning: "pencil" },
+      { text: "crayon", meaning: "pencil" },
+      { text: "book", meaning: "book" }
+    ],
+    answer: "book"
+  },
+  {
+    words: [
+      { text: "წვიმა", meaning: "rain" },
+      { text: "rain", meaning: "rain" },
+      { text: "pluie", meaning: "rain" },
+      { text: "snow", meaning: "snow" }
+    ],
+    answer: "snow"
+  },
+  {
+    words: [
+      { text: "ფეხსაცმელი", meaning: "shoe" },
+      { text: "shoe", meaning: "shoe" },
+      { text: "chaussure", meaning: "shoe" },
+      { text: "hat", meaning: "hat" }
+    ],
+    answer: "hat"
+  },
+  {
+    words: [
+      { text: "დედა", meaning: "mother" },
+      { text: "mother", meaning: "mother" },
+      { text: "mère", meaning: "mother" },
+      { text: "father", meaning: "father" }
+    ],
+    answer: "father"
+  },
+  {
+    words: [
+      { text: "სკამი", meaning: "chair" },
+      { text: "chair", meaning: "chair" },
+      { text: "chaise", meaning: "chair" },
+      { text: "table", meaning: "table" }
+    ],
+    answer: "table"
+  }
+];
+
+
+
 
 let oddIndex = 0;
 let oddPoints = 0;
