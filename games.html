@@ -11,16 +11,8 @@
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:
-    Inter,
-    Segoe UI,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Noto Color Emoji",
-    sans-serif;
+  font-family:Inter,Segoe UI,system-ui,-apple-system,BlinkMacSystemFont,
+  "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
 }
 section{max-width:900px;margin:auto;padding:70px 20px}
 h1,h2{text-align:center}
@@ -41,687 +33,248 @@ button{
   background:#2563eb;
   color:#fff;
 }
-button.secondary{
-  background:#e5e7eb;
-  color:#1e293b;
-}
+button.secondary{background:#e5e7eb;color:#1e293b}
 button:active{transform:scale(.97)}
-.game-box{
-  text-align:center;
-  margin-top:20px;
-}
-.example{
-  font-size:28px;
-  font-weight:800;
-  margin:20px 0;
-}
-.answers{
-  display:flex;
-  gap:14px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-.score{
-  margin-top:20px;
-  font-weight:700;
-  color:#2563eb;
-}
+.game-box{text-align:center;margin-top:20px}
+.example{font-size:28px;font-weight:800;margin:20px 0}
+.answers{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.score{margin-top:20px;font-weight:700;color:#2563eb}
 a{color:#2563eb;text-decoration:none;font-weight:600}
-.divider{
-  height:1px;
-  background:#e5e7eb;
-  margin:50px 0;
-}
-.memory-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-  margin-top:20px;
-}
+.divider{height:1px;background:#e5e7eb;margin:50px 0}
 
+.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
 .memory-card{
-  background:#2563eb;
-  border-radius:16px;
-  height:90px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:36px;
-  cursor:pointer;
-  user-select:none;
+  background:#2563eb;border-radius:16px;height:90px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;cursor:pointer;user-select:none;
   transition:transform .3s, background .3s;
 }
-
-.memory-card span{
-  opacity:0;
-  transition:opacity .2s;
-}
-
+.memory-card span{opacity:0;transition:opacity .2s}
 .memory-card.open span,
-.memory-card.matched span{
-  opacity:1;
-}
-
-.memory-card.open{
-  background:#fff;
-  transform:rotateY(180deg);
-}
-
-.memory-card.matched{
-  background:#16a34a;
-  cursor:default;
-}
-
+.memory-card.matched span{opacity:1}
+.memory-card.open{background:#fff;transform:rotateY(180deg)}
+.memory-card.matched{background:#16a34a;cursor:default}
 </style>
 </head>
 
 <body>
 
 <section>
-  <a href="index.html">← დაბრუნება მთავარ გვერდზე</a>
-  <h1>🎮 საგანმანათლებლო თამაშები</h1>
+<a href="index.html">← დაბრუნება მთავარ გვერდზე</a>
+<h1>🎮 საგანმანათლებლო თამაშები</h1>
+
 <div class="card" style="text-align:center">
-  <h2>🏆 საერთო ქულა</h2>
-  <div id="totalScore" style="font-size:32px;font-weight:800">
-    0
-  </div>
+<h2>🏆 საერთო ქულა</h2>
+<div id="totalScore" style="font-size:32px;font-weight:800">0</div>
 </div>
 
 <div class="divider"></div>
 
+<!-- GAME 1 -->
+<div class="card">
+<h2>🧮 მათემატიკური მაგალითები</h2>
+<div class="game-box">
+<div class="example" id="mathExample">დაიწყე თამაში</div>
+<input id="mathAnswer" type="number" placeholder="შენი პასუხი"
+style="padding:12px;border-radius:12px;border:1px solid #cbd5e1;font-size:16px">
+<br><br>
+<button onclick="checkMath()">შემოწმება</button>
+<div class="score" id="mathScore"></div>
+</div>
+</div>
 
-  <!-- GAME 1 -->
-  <div class="card">
-    <h2>🧮 მათემატიკური მაგალითები</h2>
-    <p style="text-align:center">
-      ამოხსენი 10 მაგალითი და შეაგროვე ქულები ⭐
-    </p>
+<div class="divider"></div>
 
-    <div class="game-box">
-      <div class="example" id="mathExample">დაიწყე თამაში</div>
-      <input id="mathAnswer" type="number" placeholder="შენი პასუხი"
-        style="padding:12px;border-radius:12px;border:1px solid #cbd5e1;font-size:16px">
-      <br><br>
-      <button onclick="checkMath()">შემოწმება</button>
-      <div class="score" id="mathScore"></div>
-    </div>
-  </div>
+<!-- GAME 2 -->
+<div class="card">
+<h2>⚖️ რომელი მეტია?</h2>
+<div class="game-box">
+<div class="example" id="compareExample">დაიწყე თამაში</div>
+<div class="answers">
+<button class="secondary" onclick="checkCompare('left')">⬅ მარცხენა</button>
+<button class="secondary" onclick="checkCompare('equal')">= ტოლია</button>
+<button class="secondary" onclick="checkCompare('right')">➡ მარჯვენა</button>
+</div>
+<div class="score" id="compareScore"></div>
+</div>
+</div>
 
-  <div class="divider"></div>
-
-  <!-- GAME 2 -->
-  <div class="card">
-    <h2>⚖️ რომელი მეტია?</h2>
-    <p style="text-align:center">
-      შეადარე ორი მაგალითი და აირჩიე სწორი პასუხი
-    </p>
-
-    <div class="game-box">
-      <div class="example" id="compareExample">დაიწყე თამაში</div>
-
-      <div class="answers">
-        <button class="secondary" onclick="checkCompare('left')">⬅ მარცხენა</button>
-        <button class="secondary" onclick="checkCompare('equal')">= ტოლია</button>
-        <button class="secondary" onclick="checkCompare('right')">➡ მარჯვენა</button>
-      </div>
-
-      <div class="score" id="compareScore"></div>
-    </div>
-  </div>
 <div class="divider"></div>
 
 <!-- GAME 3 -->
 <div class="card">
-  <h2>🇬🇧 ინგლისური თამაში</h2>
-  <p style="text-align:center">
-    აირჩიე სწორი სიტყვა წინადადებისთვის
-  </p>
-
-  <div class="game-box">
-    <div class="example" id="engQuestion">დაიწყე თამაში</div>
-
-    <div class="answers">
-  <!-- ARTICLES -->
-  <button id="btn-a" class="secondary" onclick="checkEng('a')">a</button>
-  <button id="btn-an" class="secondary" onclick="checkEng('an')">an</button>
-  <button id="btn-the" class="secondary" onclick="checkEng('the')">the</button>
-
-  <!-- DEMONSTRATIVES -->
-  <button id="btn-this" class="secondary" onclick="checkEng('this')">this</button>
-  <button id="btn-that" class="secondary" onclick="checkEng('that')">that</button>
-  <button id="btn-these" class="secondary" onclick="checkEng('these')">these</button>
-  <button id="btn-those" class="secondary" onclick="checkEng('those')">those</button>
+<h2>🇬🇧 ინგლისური თამაში</h2>
+<div class="game-box">
+<div class="example" id="engQuestion">დაიწყე თამაში</div>
+<div class="answers">
+<button id="btn-a" class="secondary" onclick="checkEng('a')">a</button>
+<button id="btn-an" class="secondary" onclick="checkEng('an')">an</button>
+<button id="btn-the" class="secondary" onclick="checkEng('the')">the</button>
+<button id="btn-this" class="secondary" onclick="checkEng('this')">this</button>
+<button id="btn-that" class="secondary" onclick="checkEng('that')">that</button>
+<button id="btn-these" class="secondary" onclick="checkEng('these')">these</button>
+<button id="btn-those" class="secondary" onclick="checkEng('those')">those</button>
 </div>
-
-
-
-    <div class="score" id="engScore"></div>
-  </div>
+<div class="score" id="engScore"></div>
 </div>
-<div class="divider"></div>
-
-
-<!-- GAME 4 – MEMORY -->
-<div class="card">
-  <h2>🧠 იპოვე წყვილები</h2>
-  <p style="text-align:center">
-    დააჭირე კარტებს და იპოვე ერთნაირი იკონები
-  </p>
-
-  <div class="memory-grid" id="memoryGrid"></div>
-
-  <div class="score" id="memoryScore">ნაპოვნი წყვილი: 0 / 4</div>
 </div>
 
 <div class="divider"></div>
 
-
-<!-- GAME 5 – FIND THE ODD ONE -->
+<!-- GAME 4 -->
 <div class="card">
-  <h2>🧩 რომელი არის განსხვავებული?</h2>
-  <p style="text-align:center">
-    დააჭირე იმას, რომელიც სხვებისგან განსხვავდება
-  </p>
-
-  <div class="answers" id="oddOptions" style="font-size:36px"></div>
-
-  <div class="score" id="oddScore"></div>
-
-  <button id="oddRestart" class="secondary"
-    style="display:none" onclick="restartOdd()">
-    🔄 თავიდან თამაში
-  </button>
+<h2>🧠 იპოვე წყვილები</h2>
+<div class="memory-grid" id="memoryGrid"></div>
+<div class="score" id="memoryScore">ნაპოვნი წყვილი: 0 / 4</div>
 </div>
 
+<div class="divider"></div>
+
+<!-- GAME 5 -->
+<div class="card">
+<h2>🧩 რომელი არის განსხვავებული?</h2>
+<div class="answers" id="oddOptions"></div>
+<div class="score" id="oddScore"></div>
+<button id="oddRestart" class="secondary" style="display:none" onclick="restartOdd()">🔄 თავიდან თამაში</button>
+</div>
 </section>
 
 <script>
-let totalScore = 0;
-
-function addToTotal(points){
-  totalScore += points;
-  document.getElementById("totalScore").innerText = totalScore;
-}
+let totalScore=0;
+function addToTotal(p){totalScore+=p;totalScoreEl.innerText=totalScore}
+const totalScoreEl=document.getElementById("totalScore");
 
 /* GAME 1 */
-let mathCount=0, mathPoints=0;
-let currentResult=0;
-
+let mathCount=0,mathPoints=0,currentResult=0;
 function newMath(){
-  const ops=["+","-","*"];
-
-  const a=Math.floor(Math.random()*20)+1;
-  const b=Math.floor(Math.random()*10)+1;
-  const op=ops[Math.floor(Math.random()*ops.length)];
-  currentResult=Math.floor(eval(a+op+b));
-  document.getElementById("mathExample").innerText=`${a} ${op} ${b}`;
+const ops=["+","-","*"];
+const a=Math.floor(Math.random()*20)+1;
+const b=Math.floor(Math.random()*10)+1;
+const op=ops[Math.floor(Math.random()*ops.length)];
+currentResult=eval(a+op+b);
+mathExample.innerText=`${a} ${op} ${b}`;
 }
 newMath();
-
 function checkMath(){
-  const val=Number(document.getElementById("mathAnswer").value);
-  if(val===currentResult) mathPoints++;
-  mathCount++;
-  document.getElementById("mathAnswer").value="";
-  if(mathCount<20){
-    newMath();
-    document.getElementById("mathScore").innerText=
-      `ქულა: ${mathPoints} / ${mathCount}`;
-  }else{
-    document.getElementById("mathExample").innerText="🎉 თამაში დასრულდა!";
-    document.getElementById("mathScore").innerText=
-      `შედეგი: ${mathPoints} / 20`;
-addToTotal(mathPoints);
-
-  }
+if(Number(mathAnswer.value)===currentResult)mathPoints++;
+mathCount++;mathAnswer.value="";
+if(mathCount<20){newMath();mathScore.innerText=`ქულა: ${mathPoints} / ${mathCount}`}
+else{mathExample.innerText="🎉 თამაში დასრულდა!";mathScore.innerText=`შედეგი: ${mathPoints} / 20`;addToTotal(mathPoints)}
 }
 
 /* GAME 2 */
 let leftVal=0,rightVal=0,comparePoints=0,compareCount=0;
-
 function newCompare(){
-  const ops=["+","-","*"];
-
-  const a=Math.floor(Math.random()*20)+1;
-  const b=Math.floor(Math.random()*10)+1;
-  const c=Math.floor(Math.random()*20)+1;
-  const d=Math.floor(Math.random()*10)+1;
-  const op1=ops[Math.floor(Math.random()*ops.length)];
-  const op2=ops[Math.floor(Math.random()*ops.length)];
-  leftVal=Math.floor(eval(a+op1+b));
-  rightVal=Math.floor(eval(c+op2+d));
-  document.getElementById("compareExample").innerText=
-    `${a} ${op1} ${b}   ?   ${c} ${op2} ${d}`;
+const ops=["+","-","*"];
+const a=Math.floor(Math.random()*20)+1;
+const b=Math.floor(Math.random()*10)+1;
+const c=Math.floor(Math.random()*20)+1;
+const d=Math.floor(Math.random()*10)+1;
+const op1=ops[Math.floor(Math.random()*ops.length)];
+const op2=ops[Math.floor(Math.random()*ops.length)];
+leftVal=eval(a+op1+b);rightVal=eval(c+op2+d);
+compareExample.innerText=`${a} ${op1} ${b} ? ${c} ${op2} ${d}`;
 }
 newCompare();
-
 function checkCompare(choice){
-  let correct =
-    (leftVal>rightVal && choice==="left") ||
-    (rightVal>leftVal && choice==="right") ||
-    (leftVal===rightVal && choice==="equal");
-
-  if(correct) comparePoints++;
-  compareCount++;
-
-  if(compareCount<20){
-    newCompare();
-    document.getElementById("compareScore").innerText=
-      `ქულა: ${comparePoints} / ${compareCount}`;
-  }else{
-    document.getElementById("compareExample").innerText="🏆 თამაში დასრულდა!";
-    document.getElementById("compareScore").innerText=
-      `შედეგი: ${comparePoints} / 20`;
-addToTotal(comparePoints);
-
-  }
+const correct=(leftVal>rightVal&&choice==="left")||(rightVal>leftVal&&choice==="right")||(leftVal===rightVal&&choice==="equal");
+if(correct)comparePoints++;compareCount++;
+if(compareCount<20){newCompare();compareScore.innerText=`ქულა: ${comparePoints} / ${compareCount}`}
+else{compareExample.innerText="🏆 თამაში დასრულდა!";compareScore.innerText=`შედეგი: ${comparePoints} / 20`;addToTotal(comparePoints)}
 }
-/* GAME 3 – ENGLISH */
-const engQuestions = [
-  /* ARTICLES */
-  { q: "This is ___ monkey", a: "a", type: "article" },
-  { q: "I see ___ apple", a: "an", type: "article" },
-  { q: "___ sun is yellow", a: "the", type: "article" },
-  { q: "She has ___ cat", a: "a", type: "article" },
-  { q: "This is ___ elephant", a: "an", type: "article" },
-  { q: "___ book is on the table", a: "the", type: "article" },
 
-  /* THIS / THAT / THESE / THOSE */
-  { q: "___ is my pencil (near)", a: "this", type: "demo" },
-  { q: "___ is my house (far)", a: "that", type: "demo" },
-  { q: "___ are my shoes (near)", a: "these", type: "demo" },
-  { q: "___ are the mountains (far)", a: "those", type: "demo" },
-  { q: "___ is my bag (near)", a: "this", type: "demo" },
-  { q: "___ are cars over there", a: "those", type: "demo" },
-{ q: "I have ___ orange", a: "an", type: "article" },
-{ q: "___ car is very fast", a: "the", type: "article" },
-{ q: "___ is my phone (near)", a: "this", type: "demo" },
-{ q: "___ are my friends (near)", a: "these", type: "demo" },
-{ q: "___ house is far away", a: "that", type: "demo" },
-{ q: "___ apples are red", a: "those", type: "demo" },
-{ q: "She has ___ umbrella", a: "an", type: "article" },
-{ q: "___ moon is bright", a: "the", type: "article" }
-
+/* GAME 3 */
+const engQuestions=[
+{q:"This is ___ monkey",a:"a",type:"article"},
+{q:"I see ___ apple",a:"an",type:"article"},
+{q:"___ sun is yellow",a:"the",type:"article"},
+{q:"She has ___ cat",a:"a",type:"article"},
+{q:"This is ___ elephant",a:"an",type:"article"},
+{q:"___ book is on the table",a:"the",type:"article"},
+{q:"___ is my pencil (near)",a:"this",type:"demo"},
+{q:"___ is my house (far)",a:"that",type:"demo"},
+{q:"___ are my shoes (near)",a:"these",type:"demo"},
+{q:"___ are the mountains (far)",a:"those",type:"demo"},
+{q:"___ is my bag (near)",a:"this",type:"demo"},
+{q:"___ are cars over there",a:"those",type:"demo"},
+{q:"I have ___ orange",a:"an",type:"article"},
+{q:"___ car is very fast",a:"the",type:"article"},
+{q:"___ is my phone (near)",a:"this",type:"demo"},
+{q:"___ are my friends (near)",a:"these",type:"demo"},
+{q:"___ house is far away",a:"that",type:"demo"},
+{q:"___ apples are red",a:"those",type:"demo"},
+{q:"She has ___ umbrella",a:"an",type:"article"},
+{q:"___ moon is bright",a:"the",type:"article"}
 ];
-let engIndex = 0;
-let engPoints = 0;
-
+let engIndex=0,engPoints=0;
 function showEng(){
-  const q = engQuestions[engIndex];
-
-  document.getElementById("engQuestion").innerText = q.q;
-
-  // ყველა ღილაკი
-  const articleBtns = ["btn-a","btn-an","btn-the"];
-  const demoBtns = ["btn-this","btn-that","btn-these","btn-those"];
-
-  if(q.type === "article"){
-    articleBtns.forEach(id =>
-      document.getElementById(id).style.display = "inline-block"
-    );
-    demoBtns.forEach(id =>
-      document.getElementById(id).style.display = "none"
-    );
-  }else{
-    articleBtns.forEach(id =>
-      document.getElementById(id).style.display = "none"
-    );
-    demoBtns.forEach(id =>
-      document.getElementById(id).style.display = "inline-block"
-    );
-  }
-
-  document.getElementById("engScore").innerText =
-    engIndex === 0
-      ? "დაიწყე თამაში 🎯"
-      : `ქულა: ${engPoints} / ${engIndex}`;
+const q=engQuestions[engIndex];
+engQuestion.innerText=q.q;
+["btn-a","btn-an","btn-the"].forEach(id=>document.getElementById(id).style.display=q.type==="article"?"inline-block":"none");
+["btn-this","btn-that","btn-these","btn-those"].forEach(id=>document.getElementById(id).style.display=q.type==="demo"?"inline-block":"none");
+engScore.innerText=engIndex===0?"დაიწყე თამაში 🎯":`ქულა: ${engPoints} / ${engIndex}`;
 }
-
 showEng();
-
-function checkEng(answer){
-  const box = document.getElementById("engQuestion");
-
-  if(answer === engQuestions[engIndex].a){
-    engPoints++;
-    box.style.color = "#16a34a";
-  }else{
-    box.style.color = "#dc2626";
-  }
-
-  engIndex++;
-
-  setTimeout(()=>{
-  box.style.color = "";
-  if(engIndex < engQuestions.length){
-    showEng();
-  }else{
-    box.innerText = "🎉 თამაში დასრულდა!";
-    document.getElementById("engScore").innerText =
-      `შედეგი: ${engPoints} / ${engQuestions.length}`;
-
-    addToTotal(engPoints);
-  }
-}, 500);
+function checkEng(a){
+if(a===engQuestions[engIndex].a)engPoints++;
+engIndex++;
+setTimeout(()=>{engIndex<engQuestions.length?showEng():(engQuestion.innerText="🎉 თამაში დასრულდა!",engScore.innerText=`შედეგი: ${engPoints} / ${engQuestions.length}`,addToTotal(engPoints))},300);
 }
 
-/* GAME 4 – MEMORY (FIXED FOR MOBILE) */
-document.addEventListener("DOMContentLoaded", () => {
+/* GAME 4 */
+document.addEventListener("DOMContentLoaded",()=>{
+const icons=["🐊","🐊","🐒","🐒","📱","📱","👛","👛"];
+let first=null,lock=false,found=0;
+icons.sort(()=>Math.random()-.5);
+icons.forEach(icon=>{
+const c=document.createElement("div");
+c.className="memory-card";
+const s=document.createElement("span");
+s.textContent=icon;c.appendChild(s);
+c.addEventListener("pointerup",()=>{
+if(lock||c.classList.contains("open")||c.classList.contains("matched"))return;
+c.classList.add("open");
+if(!first)first=c;
+else{
+if(first.textContent===s.textContent){
+first.classList.add("matched");c.classList.add("matched");
+found++;memoryScore.innerText=`ნაპოვნი წყვილი: ${found} / 4`;addToTotal(1);first=null;
+}else{
+lock=true;
+setTimeout(()=>{first.classList.remove("open");c.classList.remove("open");first=null;lock=false},600);
+}
+}
+});
+memoryGrid.appendChild(c);
+});
+});
 
-  const icons = ["🐊","🐊","🐒","🐒","📱","📱","👛","👛"];
-  let firstCard = null;
-  let lockBoard = false;
-  let foundPairs = 0;
-
-  const grid = document.getElementById("memoryGrid");
-  const score = document.getElementById("memoryScore");
-
-  grid.innerHTML = "";
-  icons.sort(() => Math.random() - 0.5);
-
-  icons.forEach(icon => {
-    const card = document.createElement("div");
-    card.className = "memory-card";
-
-    const span = document.createElement("span");
-    span.textContent = icon;
-    card.appendChild(span);
-
-    card.addEventListener("pointerup", () => {
-      if (lockBoard || card.classList.contains("open") || card.classList.contains("matched")) return;
-
-      card.classList.add("open");
-
-      if (!firstCard) {
-        firstCard = card;
-      } else {
-        if (
-          firstCard.querySelector("span").textContent === span.textContent &&
-          firstCard !== card
-        ) {
-          firstCard.classList.add("matched");
-          card.classList.add("matched");
-          foundPairs++;
-          score.textContent = `ნაპოვნი წყვილი: ${foundPairs} / 4`;
-          addToTotal(1);
-          firstCard = null;
-        } else {
-          lockBoard = true;
-          setTimeout(() => {
-            firstCard.classList.remove("open");
-            card.classList.remove("open");
-            firstCard = null;
-            lockBoard = false;
-          }, 650);
-        }
-      }
-    });
-
-    grid.appendChild(card);
-  });
-}); 
-
-
-/* GAME 5 – FIND THE ODD ONE (WORDS, 4 LANGUAGES) */
-
-const oddQuestions = [
-  {
-    words: [
-      { text: "ვაშლი", meaning: "apple" },     // ქართული
-      { text: "apple", meaning: "apple" },     // ინგლისური
-      { text: "яблоко", meaning: "apple" },    // რუსული
-      { text: "ქლიავი", meaning: "plum" }      // განსხვავებული
-    ],
-    answer: "plum"
-  },
-  {
-    words: [
-      { text: "სახლი", meaning: "house" },
-      { text: "house", meaning: "house" },
-      { text: "maison", meaning: "house" },
-      { text: "дерево", meaning: "tree" }
-    ],
-    answer: "tree"
-  },
-  {
-    words: [
-      { text: "ძაღლი", meaning: "dog" },
-      { text: "dog", meaning: "dog" },
-      { text: "chien", meaning: "dog" },
-      { text: "кошка", meaning: "cat" }
-    ],
-    answer: "cat"
-  },
-  {
-    words: [
-      { text: "წყალი", meaning: "water" },
-      { text: "water", meaning: "water" },
-      { text: "eau", meaning: "water" },
-      { text: "молоко", meaning: "milk" }
-    ],
-    answer: "milk"
-  }
+/* GAME 5 */
+const oddQuestions=[
+{words:[{text:"ვაშლი",meaning:"apple"},{text:"apple",meaning:"apple"},{text:"яблоко",meaning:"apple"},{text:"ქლიავი",meaning:"plum"}],answer:"plum"},
+{words:[{text:"სახლი",meaning:"house"},{text:"house",meaning:"house"},{text:"maison",meaning:"house"},{text:"дерево",meaning:"tree"}],answer:"tree"},
+{words:[{text:"ძაღლი",meaning:"dog"},{text:"dog",meaning:"dog"},{text:"chien",meaning:"dog"},{text:"кошка",meaning:"cat"}],answer:"cat"},
+{words:[{text:"წყალი",meaning:"water"},{text:"water",meaning:"water"},{text:"eau",meaning:"water"},{text:"მოლоко",meaning:"milk"}],answer:"milk"}
 ];
-const oddQuestions = [
-  {
-    words: [
-      { text: "ვაშლი", meaning: "apple" },
-      { text: "apple", meaning: "apple" },
-      { text: "яблоко", meaning: "apple" },
-      { text: "ქლიავი", meaning: "plum" }
-    ],
-    answer: "plum"
-  },
-  {
-    words: [
-      { text: "სახლი", meaning: "house" },
-      { text: "house", meaning: "house" },
-      { text: "maison", meaning: "house" },
-      { text: "дерево", meaning: "tree" }
-    ],
-    answer: "tree"
-  },
-  {
-    words: [
-      { text: "ძაღლი", meaning: "dog" },
-      { text: "dog", meaning: "dog" },
-      { text: "chien", meaning: "dog" },
-      { text: "кошка", meaning: "cat" }
-    ],
-    answer: "cat"
-  },
-  {
-    words: [
-      { text: "წყალი", meaning: "water" },
-      { text: "water", meaning: "water" },
-      { text: "eau", meaning: "water" },
-      { text: "молоко", meaning: "milk" }
-    ],
-    answer: "milk"
-  },
-  {
-    words: [
-      { text: "მზე", meaning: "sun" },
-      { text: "sun", meaning: "sun" },
-      { text: "soleil", meaning: "sun" },
-      { text: "moon", meaning: "moon" }
-    ],
-    answer: "moon"
-  },
-  {
-    words: [
-      { text: "ხე", meaning: "tree" },
-      { text: "tree", meaning: "tree" },
-      { text: "arbre", meaning: "tree" },
-      { text: "dog", meaning: "dog" }
-    ],
-    answer: "dog"
-  },
-  {
-    words: [
-      { text: "კატა", meaning: "cat" },
-      { text: "cat", meaning: "cat" },
-      { text: "chat", meaning: "cat" },
-      { text: "horse", meaning: "horse" }
-    ],
-    answer: "horse"
-  },
-  {
-    words: [
-      { text: "რძე", meaning: "milk" },
-      { text: "milk", meaning: "milk" },
-      { text: "lait", meaning: "milk" },
-      { text: "water", meaning: "water" }
-    ],
-    answer: "water"
-  },
-  {
-    words: [
-      { text: "წიგნი", meaning: "book" },
-      { text: "book", meaning: "book" },
-      { text: "livre", meaning: "book" },
-      { text: "pen", meaning: "pen" }
-    ],
-    answer: "pen"
-  },
-  {
-    words: [
-      { text: "ბურთი", meaning: "ball" },
-      { text: "ball", meaning: "ball" },
-      { text: "balle", meaning: "ball" },
-      { text: "car", meaning: "car" }
-    ],
-    answer: "car"
-  },
-  {
-    words: [
-      { text: "თევზი", meaning: "fish" },
-      { text: "fish", meaning: "fish" },
-      { text: "poisson", meaning: "fish" },
-      { text: "bird", meaning: "bird" }
-    ],
-    answer: "bird"
-  },
-  {
-    words: [
-      { text: "ფანქარი", meaning: "pencil" },
-      { text: "pencil", meaning: "pencil" },
-      { text: "crayon", meaning: "pencil" },
-      { text: "book", meaning: "book" }
-    ],
-    answer: "book"
-  },
-  {
-    words: [
-      { text: "წვიმა", meaning: "rain" },
-      { text: "rain", meaning: "rain" },
-      { text: "pluie", meaning: "rain" },
-      { text: "snow", meaning: "snow" }
-    ],
-    answer: "snow"
-  },
-  {
-    words: [
-      { text: "ფეხსაცმელი", meaning: "shoe" },
-      { text: "shoe", meaning: "shoe" },
-      { text: "chaussure", meaning: "shoe" },
-      { text: "hat", meaning: "hat" }
-    ],
-    answer: "hat"
-  },
-  {
-    words: [
-      { text: "დედა", meaning: "mother" },
-      { text: "mother", meaning: "mother" },
-      { text: "mère", meaning: "mother" },
-      { text: "father", meaning: "father" }
-    ],
-    answer: "father"
-  },
-  {
-    words: [
-      { text: "სკამი", meaning: "chair" },
-      { text: "chair", meaning: "chair" },
-      { text: "chaise", meaning: "chair" },
-      { text: "table", meaning: "table" }
-    ],
-    answer: "table"
-  }
-];
-
-
-
-
-let oddIndex = 0;
-let oddPoints = 0;
-
-const oddBox = document.getElementById("oddOptions");
-const oddScore = document.getElementById("oddScore");
-
+let oddIndex=0,oddPoints=0;
 function showOdd(){
-  oddBox.innerHTML = "";
-
-  const q = oddQuestions[oddIndex];
-
-  // აურიე სიტყვები
-  const shuffled = [...q.words].sort(() => Math.random() - 0.5);
-
-  shuffled.forEach(wordObj => {
-    const btn = document.createElement("button");
-    btn.className = "secondary";
-    btn.style.fontSize = "20px";
-    btn.style.padding = "14px 18px";
-    btn.style.minWidth = "120px";
-    btn.innerText = wordObj.text;
-
-    btn.onclick = () => checkOdd(wordObj.meaning, btn);
-    oddBox.appendChild(btn);
-  });
-
-  oddScore.innerText =
-    oddIndex === 0
-      ? "იპოვე განსხვავებული სიტყვა 🧠"
-      : `ქულა: ${oddPoints} / ${oddIndex}`;
+oddOptions.innerHTML="";
+oddQuestions[oddIndex].words.sort(()=>Math.random()-.5).forEach(w=>{
+const b=document.createElement("button");
+b.className="secondary";b.textContent=w.text;
+b.onclick=()=>checkOdd(w.meaning,b);
+oddOptions.appendChild(b);
+});
+oddScore.innerText=oddIndex===0?"იპოვე განსხვავებული სიტყვა 🧠":`ქულა: ${oddPoints} / ${oddIndex}`;
 }
-
-function checkOdd(chosenMeaning, btn){
-  const correctMeaning = oddQuestions[oddIndex].answer;
-
-  if(chosenMeaning === correctMeaning){
-    oddPoints++;
-    btn.style.background = "#16a34a";
-    btn.style.color = "#fff";
-    addToTotal(1);
-  }else{
-    btn.style.background = "#dc2626";
-    btn.style.color = "#fff";
-  }
-
-  oddIndex++;
-
-  setTimeout(() => {
-    if(oddIndex < oddQuestions.length){
-      showOdd();
-    }else{
-      oddBox.innerHTML = "🏆 თამაში დასრულდა!";
-      oddScore.innerText =
-        `შედეგი: ${oddPoints} / ${oddQuestions.length}`;
-      document.getElementById("oddRestart").style.display = "inline-block";
-    }
-  }, 700);
+function checkOdd(m,b){
+if(m===oddQuestions[oddIndex].answer){oddPoints++;b.style.background="#16a34a";addToTotal(1)}
+else b.style.background="#dc2626";
+oddIndex++;
+setTimeout(()=>oddIndex<oddQuestions.length?showOdd():(oddOptions.innerText="🏆 თამაში დასრულდა!",oddScore.innerText=`შედეგი: ${oddPoints} / ${oddQuestions.length}`,oddRestart.style.display="inline-block"),600);
 }
-
-function restartOdd(){
-  oddIndex = 0;
-  oddPoints = 0;
-  document.getElementById("oddRestart").style.display = "none";
-  showOdd();
-}
-
-// start game
+function restartOdd(){oddIndex=0;oddPoints=0;oddRestart.style.display="none";showOdd()}
 showOdd();
-
-
 </script>
 
 </body>
