@@ -88,26 +88,29 @@ a{color:#2563eb;text-decoration:none;font-weight:600}
   justify-content:center;
   font-size:36px;
   cursor:pointer;
-  color:transparent;
   user-select:none;
   transition:transform .3s, background .3s;
 }
 
+.memory-card span{
+  opacity:0;
+  transition:opacity .2s;
+}
+
+.memory-card.open span,
+.memory-card.matched span{
+  opacity:1;
+}
+
 .memory-card.open{
   background:#fff;
-  color:#1e293b;
   transform:rotateY(180deg);
 }
 
 .memory-card.matched{
   background:#16a34a;
-  color:#fff;
   cursor:default;
 }
-.memory-card:not(.open):not(.matched){
-  color: transparent !important;
-}
-
 
 </style>
 </head>
@@ -393,54 +396,61 @@ function checkEng(answer){
 }, 500);
 }
 
-/* GAME 4 – MEMORY */
-const icons = ["🐊","🐊","🐒","🐒","📱","📱","👛","👛","❓"];
-let firstCard = null;
-let lockBoard = false;
-let foundPairs = 0;
+/* GAME 4 – MEMORY (FIXED FOR MOBILE) */
+document.addEventListener("DOMContentLoaded", () => {
 
-// shuffle
-icons.sort(() => Math.random() - 0.5);
+  const icons = ["🐊","🐊","🐒","🐒","📱","📱","👛","👛"];
+  let firstCard = null;
+  let lockBoard = false;
+  let foundPairs = 0;
 
-const grid = document.getElementById("memoryGrid");
-const score = document.getElementById("memoryScore");
+  const grid = document.getElementById("memoryGrid");
+  const score = document.getElementById("memoryScore");
 
-icons.forEach(icon=>{
-  const card = document.createElement("div");
-  card.className = "memory-card";
-  card.innerText = icon;
+  grid.innerHTML = "";
+  icons.sort(() => Math.random() - 0.5);
 
-  card.onclick = () => {
-    if(lockBoard || card.classList.contains("open") || card.classList.contains("matched")) return;
+  icons.forEach(icon => {
+    const card = document.createElement("div");
+    card.className = "memory-card";
 
-    card.classList.add("open");
+    const span = document.createElement("span");
+    span.textContent = icon;
+    card.appendChild(span);
 
-    if(!firstCard){
-      firstCard = card;
-    }else{
-      if(firstCard.innerText === card.innerText && firstCard !== card){
+    card.addEventListener("pointerup", () => {
+      if (lockBoard || card.classList.contains("open") || card.classList.contains("matched")) return;
 
-        firstCard.classList.add("matched");
-        card.classList.add("matched");
-        foundPairs++;
-        score.innerText = `ნაპოვნი წყვილი: ${foundPairs} / 4`;
-addToTotal(1);
+      card.classList.add("open");
 
-        firstCard = null;
-      }else{
-        lockBoard = true;
-        setTimeout(()=>{
-          firstCard.classList.remove("open");
-          card.classList.remove("open");
+      if (!firstCard) {
+        firstCard = card;
+      } else {
+        if (
+          firstCard.querySelector("span").textContent === span.textContent &&
+          firstCard !== card
+        ) {
+          firstCard.classList.add("matched");
+          card.classList.add("matched");
+          foundPairs++;
+          score.textContent = `ნაპოვნი წყვილი: ${foundPairs} / 4`;
+          addToTotal(1);
           firstCard = null;
-          lockBoard = false;
-        }, 700);
+        } else {
+          lockBoard = true;
+          setTimeout(() => {
+            firstCard.classList.remove("open");
+            card.classList.remove("open");
+            firstCard = null;
+            lockBoard = false;
+          }, 650);
+        }
       }
-    }
-  };
+    });
 
-  grid.appendChild(card);
-});
+    grid.appendChild(card);
+  });
+
 
 /* GAME 5 – FIND THE ODD ONE */
 
