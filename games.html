@@ -450,16 +450,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
     grid.appendChild(card);
   });
+}); 
 
 
-/* GAME 5 – FIND THE ODD ONE */
+/* GAME 5 – FIND THE ODD ONE (WORDS, 4 LANGUAGES) */
 
 const oddQuestions = [
-  { items: ["🐶","🐶","🐶","🍎"], answer: "🍎" },
-  { items: ["🚗","🚗","🚲","🚗"], answer: "🚲" },
-  { items: ["🍌","🍌","🍓","🍌"], answer: "🍓" },
-  { items: ["🐱","🐱","🐶","🐱"], answer: "🐶" },
-  { items: ["🔵","🔵","🔵","🔴"], answer: "🔴" }
+  {
+    words: [
+      { text: "ვაშლი", meaning: "apple" },     // ქართული
+      { text: "apple", meaning: "apple" },     // ინგლისური
+      { text: "яблоко", meaning: "apple" },    // რუსული
+      { text: "ქლიავი", meaning: "plum" }      // განსხვავებული
+    ],
+    answer: "plum"
+  },
+  {
+    words: [
+      { text: "სახლი", meaning: "house" },
+      { text: "house", meaning: "house" },
+      { text: "maison", meaning: "house" },
+      { text: "дерево", meaning: "tree" }
+    ],
+    answer: "tree"
+  },
+  {
+    words: [
+      { text: "ძაღლი", meaning: "dog" },
+      { text: "dog", meaning: "dog" },
+      { text: "chien", meaning: "dog" },
+      { text: "кошка", meaning: "cat" }
+    ],
+    answer: "cat"
+  },
+  {
+    words: [
+      { text: "წყალი", meaning: "water" },
+      { text: "water", meaning: "water" },
+      { text: "eau", meaning: "water" },
+      { text: "молоко", meaning: "milk" }
+    ],
+    answer: "milk"
+  }
 ];
 
 let oddIndex = 0;
@@ -470,33 +502,38 @@ const oddScore = document.getElementById("oddScore");
 
 function showOdd(){
   oddBox.innerHTML = "";
+
   const q = oddQuestions[oddIndex];
 
-  q.items
-    .sort(() => Math.random() - 0.5)
-    .forEach(item=>{
-      const btn = document.createElement("button");
-      btn.className = "secondary";
-      btn.style.fontSize = "36px";
-      btn.innerText = item;
+  // აურიე სიტყვები
+  const shuffled = [...q.words].sort(() => Math.random() - 0.5);
 
-      btn.onclick = () => checkOdd(item, btn);
-      oddBox.appendChild(btn);
-    });
+  shuffled.forEach(wordObj => {
+    const btn = document.createElement("button");
+    btn.className = "secondary";
+    btn.style.fontSize = "20px";
+    btn.style.padding = "14px 18px";
+    btn.style.minWidth = "120px";
+    btn.innerText = wordObj.text;
+
+    btn.onclick = () => checkOdd(wordObj.meaning, btn);
+    oddBox.appendChild(btn);
+  });
 
   oddScore.innerText =
     oddIndex === 0
-      ? "დაიწყე თამაში 🎯"
+      ? "იპოვე განსხვავებული სიტყვა 🧠"
       : `ქულა: ${oddPoints} / ${oddIndex}`;
 }
 
-function checkOdd(choice, btn){
-  if(choice === oddQuestions[oddIndex].answer){
+function checkOdd(chosenMeaning, btn){
+  const correctMeaning = oddQuestions[oddIndex].answer;
+
+  if(chosenMeaning === correctMeaning){
     oddPoints++;
     btn.style.background = "#16a34a";
     btn.style.color = "#fff";
-addToTotal(1);
-
+    addToTotal(1);
   }else{
     btn.style.background = "#dc2626";
     btn.style.color = "#fff";
@@ -504,7 +541,7 @@ addToTotal(1);
 
   oddIndex++;
 
-  setTimeout(()=>{
+  setTimeout(() => {
     if(oddIndex < oddQuestions.length){
       showOdd();
     }else{
@@ -513,7 +550,7 @@ addToTotal(1);
         `შედეგი: ${oddPoints} / ${oddQuestions.length}`;
       document.getElementById("oddRestart").style.display = "inline-block";
     }
-  }, 600);
+  }, 700);
 }
 
 function restartOdd(){
